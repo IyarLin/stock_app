@@ -5,8 +5,9 @@ account: iyarlin
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1616040
-bundleId: 3536725
+bundleId: 5749326
 url: https://iyarlin.shinyapps.io/stock_app/
-when: 1597905421.0738
+when: 1648727607.73065
+lastSyncTime: 1648727607.73066
 asMultiple: FALSE
 asStatic: FALSE

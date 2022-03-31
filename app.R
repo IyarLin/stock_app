@@ -10,7 +10,8 @@ choices <- c("S&P 500 (USA)",
              "NIKKEI 225 (Japan)", 
              "MOEX (Russia)", 
              "SSE Composite Index (China)", 
-             "iShares Latin America 40 ETF")
+             "iShares Latin America 40 ETF", 
+             "iShares MSCI World ETF")
 
 cols <- hcl(h = seq(15, 375, length = length(choices) + 1), l = 65, c = 100)[1:length(choices)]
 
@@ -30,7 +31,7 @@ ui <- fluidPage(
                                "YTD", "1 year", "5 years", "10 years", 
                                "from date"), selected = "week"),
       dateInput(inputId = "from_date_selector", label = h2("From"), 
-                value = as.Date("2017-08-27"))),
+                value = as.Date("2017-03-03"))),
     mainPanel = mainPanel(h1("Please wait a few seconds for the data to load"),
                           plotOutput(outputId = "stock_price_plot"))
   )
@@ -40,14 +41,15 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   prices <- tq_get(c("^GSPC", "^STOXX", "^N225", "000001.SS", "IMOEX.ME", 
-                     "ILF"), from = "1900-01-01") %>%
+                     "ILF", "URTH"), from = "1900-01-01") %>%
     mutate(index = case_when(
       symbol == "^GSPC" ~ choices[1],
       symbol == "^STOXX" ~ choices[2],
       symbol == "^N225" ~ choices[3], 
       symbol == "000001.SS" ~ choices[4], 
       symbol == "IMOEX.ME" ~ choices[5], 
-      symbol == "ILF" ~ choices[6]
+      symbol == "ILF" ~ choices[6], 
+      symbol == "URTH" ~ choices[7]
     )) %>%
     filter(!is.na(close))
   
